@@ -1,24 +1,52 @@
 # Bangalore Tech Salary Decoder
 
-A data-cleaning and exploratory analysis project that decodes compensation patterns across Bengaluru tech roles. The notebook cleans a synthetic salary dataset of 1,000 tech professionals and answers practical business questions about pay drivers such as role, experience, company type, skills, and education.
+A professional data-cleaning and exploratory data analysis project focused on decoding salary patterns in Bengaluru's tech industry. This project uses the included `bangalore_tech_salaries.csv` dataset and analyzes how compensation varies by role, experience, company type, skills, education tier, and work mode.
 
 > Built as part of **The Unlox Academy — 2-Hour Live Project**.
 
 ---
 
-## Project Overview
+## Project Summary
 
-The goal of this project is to transform messy salary data into clear, decision-ready insights. The analysis focuses on current CTC in LPA and compares salaries across job families, experience bands, company types, and technical skills.
+The objective of this project is to convert a messy real-world-style salary dataset into clean, structured insights. The dataset contains salary records for Bengaluru tech professionals, including job roles, experience, current and previous CTC, company type, skills, location, education tier, joining year, and work mode.
 
-The final notebook produces:
+The notebook performs end-to-end analysis starting from raw data inspection, followed by cleaning, standardization, business-question analysis, and a final formatted report.
 
-- A cleaned and standardized salary dataset
-- Role-wise CTC summaries
-- Experience-based salary growth analysis
-- Skill premium analysis for SDE roles
-- Company-type salary comparison
-- Identification of potentially underpaid professionals
-- A formatted text report suitable for sharing on LinkedIn or in a portfolio
+---
+
+## Dataset
+
+The dataset is included in this repository:
+
+```text
+bangalore_tech_salaries.csv
+```
+
+### Raw Dataset Details
+
+- **Rows:** 1,015
+- **Columns:** 12
+- **Duplicate rows:** 15
+- **Cleaned records used for analysis:** 1,000
+- **Domain:** Bengaluru tech salary analytics
+- **Dataset type:** Synthetic learning dataset
+
+### Dataset Columns
+
+| Column | Description |
+|---|---|
+| `Employee_ID` | Unique employee identifier |
+| `Role` | Job role of the professional; contains multiple naming variations before cleaning |
+| `years_exp` | Total years of professional experience |
+| `Current_CTC` | Current compensation, stored in multiple formats such as LPA and rupees |
+| `Previous_CTC` | Previous compensation; missing for freshers or first-job professionals |
+| `Company` | Company name |
+| `company_TYPE` | Type of company such as MNC, Unicorn, Mid-size, or Early-stage |
+| `Skills` | Skills listed for the professional |
+| `Location` | Bengaluru location/area |
+| `Education_Tier` | Education tier category |
+| `Joining_Year` | Year of joining the current company |
+| `Work_Mode` | Remote, hybrid, or onsite work mode |
 
 ---
 
@@ -26,57 +54,44 @@ The final notebook produces:
 
 ```text
 Salary_Decoder/
-├── LiveProject_Salary_Decoder_GVaishanth.ipynb   # Main analysis notebook
+├── bangalore_tech_salaries.csv                    # Dataset used for analysis
+├── LiveProject_Salary_Decoder_GVaishanth.ipynb   # Main Jupyter Notebook
 ├── README.md                                     # Project documentation
 └── .gitattributes
 ```
 
-> Note: The notebook expects a CSV file named `bangalore_tech_salaries.csv` in the project root. If the dataset is not present in the repository, place it in the root folder before running the notebook.
+---
+
+## Key Business Questions
+
+This project answers five practical salary-analysis questions:
+
+1. **Which roles have the highest and lowest median CTC?**
+2. **How does salary grow with experience for SDE Backend professionals?**
+3. **Which skills provide the strongest salary premium for SDE roles?**
+4. **How much does company type affect salary for the same role?**
+5. **Which professionals appear underpaid compared with their peer group?**
 
 ---
 
-## Key Business Questions Answered
+## Data Cleaning Process
 
-1. **Which tech roles have the highest and lowest median CTC?**
-2. **How does SDE Backend salary grow with experience?**
-3. **Which skills create the strongest salary premium for SDEs?**
-4. **How much does company type influence pay for the same role?**
-5. **Which professionals appear most underpaid compared with their peer group?**
+The raw dataset contains inconsistent formatting, duplicate records, missing values, and mixed salary formats. The notebook cleans the dataset through the following steps:
 
----
-
-## Highlight Insights
-
-### 1. Product Managers lead in median pay
-Product Managers have the highest median CTC at **31.3 LPA**, while Data Analysts have the lowest median among the analyzed roles at **16.3 LPA**.
-
-### 2. Early experience creates the biggest salary jump
-For SDE Backend roles, median CTC grows from **11.6 LPA** at 0–1 years of experience to **40.4 LPA** at 6+ years. The largest percentage jump occurs between **0–1 years and 2–3 years**, with approximately **72% growth**.
-
-### 3. System Design has the strongest skill premium
-Among the tested skills, **System Design** shows the highest salary premium for SDEs, with a median CTC of **25.3 LPA** compared with **21.0 LPA** for those without it — a **20.5% premium**.
-
-### 4. Unicorn companies pay a strong premium
-For the same SDE Backend role, Unicorns show a median CTC of **27.4 LPA**, compared with **20.5 LPA** at MNCs — a **33.7% premium**.
-
-### 5. Underpaid professionals are concentrated in MNCs
-The analysis found that all top 10 most-underpaid professionals, relative to their peer groups, work at MNCs. The largest observed gap is **-7.9 LPA** against the peer median.
-
----
-
-## Data Cleaning Performed
-
-The notebook includes a structured cleaning pipeline:
-
-- Standardized column names to `snake_case`
-- Removed duplicate rows
-- Consolidated inconsistent role names into clean role categories
-- Converted CTC values from multiple formats into numeric LPA values
-- Standardized company type labels
-- Standardized education tier labels
-- Standardized work mode values
-- Cleaned skill text for skill-based filtering
-- Created experience bands:
+- Renames columns into a consistent `snake_case` format
+- Removes duplicate rows
+- Standardizes role names such as `DS`, `BA`, `SDE-Backend`, `FullStack`, and `PM`
+- Converts CTC values into numeric LPA format
+- Handles salary formats such as:
+  - `15.5 LPA`
+  - `15.5`
+  - `15,50,000`
+  - `Rs 15.5 LPA`
+- Standardizes company type labels
+- Standardizes education tier values
+- Standardizes work mode values
+- Cleans skills text for skill-based comparison
+- Creates experience bands:
   - `0-1`
   - `2-3`
   - `4-5`
@@ -84,14 +99,52 @@ The notebook includes a structured cleaning pipeline:
 
 ---
 
-## Tools and Libraries
+## Analysis Performed
 
-The project uses:
+The notebook uses simple and interpretable analytics methods, including:
+
+- Role-wise median, mean, minimum, and maximum CTC comparison
+- Experience-band salary growth analysis
+- Skill premium analysis for SDE roles
+- Company-type salary premium comparison
+- Peer-group salary benchmarking
+- Identification of underpaid professionals using group median comparison
+
+Peer groups are created using:
+
+```text
+role + company type + experience band
+```
+
+This makes the underpayment analysis more meaningful because each person is compared with similar professionals.
+
+---
+
+## Key Insights
+
+### 1. Product Managers have the highest median salary
+Product Managers show the highest median CTC at **31.3 LPA**, while Data Analysts have the lowest median CTC at **16.3 LPA** among the analyzed roles.
+
+### 2. SDE Backend salary grows strongly with experience
+For SDE Backend professionals, median CTC increases from **11.6 LPA** for 0–1 years of experience to **40.4 LPA** for 6+ years of experience. The largest percentage jump happens from 0–1 years to 2–3 years, with approximately **72% growth**.
+
+### 3. System Design is the strongest salary-differentiating skill
+For SDE roles, professionals with **System Design** skills have a median CTC of **25.3 LPA**, compared with **21.0 LPA** for those without it. This represents a **20.5% salary premium**.
+
+### 4. Unicorn companies pay a clear premium
+For the same SDE Backend role, Unicorn companies show a median CTC of **27.4 LPA**, while MNCs show **20.5 LPA**. This indicates a **33.7% premium** for Unicorn companies over MNCs.
+
+### 5. Underpaid professionals are concentrated in MNCs
+The top 10 most-underpaid professionals identified by the analysis are all from MNCs. The largest observed gap is **-7.9 LPA** compared with the peer-group median.
+
+---
+
+## Tools and Technologies
 
 - **Python**
-- **Pandas** — data loading, cleaning, grouping, aggregation
-- **NumPy** — numeric handling
-- **Jupyter Notebook** — analysis and reporting
+- **Pandas**
+- **NumPy**
+- **Jupyter Notebook**
 
 ---
 
@@ -104,97 +157,57 @@ git clone https://github.com/GVaishanth/Salary_Decoder.git
 cd Salary_Decoder
 ```
 
-### 2. Add the dataset
-
-Place the dataset file in the project root with this exact name:
-
-```text
-bangalore_tech_salaries.csv
-```
-
-### 3. Install dependencies
-
-If you do not already have the required packages installed, run:
+### 2. Install dependencies
 
 ```bash
 pip install pandas numpy jupyter
 ```
 
-### 4. Launch Jupyter Notebook
+### 3. Open Jupyter Notebook
 
 ```bash
 jupyter notebook
 ```
 
-Open and run:
+### 4. Run the notebook
+
+Open the notebook below and run all cells from top to bottom:
 
 ```text
 LiveProject_Salary_Decoder_GVaishanth.ipynb
 ```
 
-Run the cells from top to bottom to reproduce the cleaning steps, analysis outputs, insights, and final printed report.
+The dataset is already included in the repository, so no additional data download is required.
 
 ---
 
-## Expected Dataset Columns
+## Final Output
 
-The notebook is designed for a salary dataset containing columns similar to:
-
-| Column | Description |
-|---|---|
-| `Employee_ID` | Unique employee identifier |
-| `Role` | Employee job role |
-| `Years_Exp` | Years of professional experience |
-| `Current_CTC` | Current compensation value |
-| `Previous_CTC` | Previous compensation value |
-| `Company_Type` | Employer type such as MNC, Unicorn, Mid-size, or Early-stage |
-| `Education_Tier` | Education tier category |
-| `Work_Mode` | Remote, hybrid, or onsite work setup |
-| `Skills` | Skills associated with the employee profile |
-
----
-
-## Analysis Methods
-
-The project uses simple, interpretable analytics methods:
-
-- Median and mean CTC comparison by role
-- Experience-band salary curve analysis
-- Skill-based median CTC comparison
-- Company-type premium calculation
-- Peer-group benchmarking using `(role, company_type, exp_band)` groups
-- Underpayment detection based on CTC gap from group median
-
----
-
-## Final Report Output
-
-The notebook ends with a formatted report titled:
+The notebook ends with a formatted salary report titled:
 
 ```text
 BANGALORE TECH SALARY DECODER
 ```
 
-The report summarizes:
+The report includes:
 
 - Median CTC by role
-- SDE Backend CTC by experience band
-- Skill premiums for SDEs
-- Company-type premium for SDE Backend
+- SDE Backend salary by experience band
+- Skill premium comparison for SDEs
+- Company-type premium analysis
 - Top underpaid professionals
-- Three key insights with actionable takeaways
+- Three action-oriented salary insights
 
 ---
 
-## Project Status
+## Possible Future Improvements
 
-Completed as a notebook-based analytics project. Future improvements could include:
-
-- Adding visual charts with Matplotlib or Seaborn
-- Exporting cleaned data to CSV
-- Converting the notebook into a reusable Python script
-- Building a Streamlit dashboard for interactive salary exploration
-- Adding automated tests for cleaning functions
+- Add salary visualizations using Matplotlib or Seaborn
+- Export the cleaned dataset as a CSV file
+- Convert repeated cleaning logic into reusable Python functions
+- Build a Streamlit dashboard for interactive salary exploration
+- Add more analysis by location, work mode, joining year, and education tier
+- Add automated checks for data quality and duplicate detection
 
 ---
 
@@ -208,4 +221,4 @@ Completed as a notebook-based analytics project. Future improvements could inclu
 
 ## Disclaimer
 
-This project uses a synthetic Bengaluru tech salary dataset for learning and portfolio purposes. The insights should be interpreted as dataset-specific findings, not as official market compensation benchmarks.
+This project uses a synthetic Bengaluru tech salary dataset for educational and portfolio purposes. The insights are specific to this dataset and should not be treated as official salary benchmarks.
